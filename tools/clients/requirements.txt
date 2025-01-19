@@ -1,0 +1,2 @@
+pygame==2.6.1
+ledgerblue==0.1.54

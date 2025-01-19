@@ -1,0 +1,66 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Clean,Build DEBUG and Run speculos",
+            "type": "shell",
+            "dependsOn": [
+                "kill speculos"
+            ],
+            "command": "make -C ./ clean && export BOLOS_SDK=$(echo $NANOSP_SDK) && make -C ./ -B -j DEBUG=1 && speculos --model nanosp build/nanos2/bin/app.elf"
+        },
+        {
+            "label": "Clean,Build and Run speculos",
+            "type": "shell",
+            "dependsOn": [
+                "kill speculos"
+            ],
+            "command": "make -C ./ clean && export BOLOS_SDK=$(echo $NANOSP_SDK) && make -C ./ -B -j && speculos --model nanosp build/nanos2/bin/app.elf"
+        },
+        {
+            "label": "Clean,Build and Run speculos DEBUG",
+            "type": "shell",
+            "dependsOn": [
+                "kill speculos"
+            ],
+            "command": "make -C ./ clean && export BOLOS_SDK=$(echo $NANOSP_SDK) && make -C ./ -B -j DEBUG=1 && speculos -d --model nanosp build/nanos2/bin/app.elf",
+            "isBackground": true,
+            "problemMatcher": {
+                "pattern": [
+					{
+						"regexp": ".",
+						"file": 1,
+						"location": 2,
+						"message": 3
+					}
+				],
+				"background": {
+					"activeOnStart": true,
+					"beginsPattern": ".",
+					"endsPattern": "."
+				}
+			}
+        },
+        {
+            "label": "kill speculos",
+            "type": "shell",
+            "command": "(pkill -f speculos && kill -kill $(pgrep qemu)) || echo 0",
+            "isBackground": true,
+            "presentation": {
+                "reveal": "never"
+            }
+        },
+        {
+            "label": "generate doc",
+            "type": "shell",
+            "command": "doxygen .doxygen/Doxyfile",
+            "isBackground": true,
+            "presentation": {
+                "reveal": "never"
+            }
+
+        }
+    ]
+}

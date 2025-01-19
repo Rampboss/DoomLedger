@@ -1,0 +1,15 @@
+{
+    "files.associations": {
+        "*.h": "c"
+    },
+    "C_Cpp.clang_format_path": "/usr/bin/clang-format",
+    "editor.formatOnSave": false,
+    "python.terminal.activateEnvironment": false,
+    "git.ignoreLimitWarning": true,
+    "ledgerDevTools.appSettings": {
+        "selectedDevice": "Nano S Plus",
+        "selectedUseCase": "release"
+    },
+    "C_Cpp.errorSquiggles": "disabled",
+
+}

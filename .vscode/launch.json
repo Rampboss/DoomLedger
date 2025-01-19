@@ -1,0 +1,31 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        
+        
+        
+        {
+            "type": "gdb",
+            "request": "attach",
+            "name": "Attach to gdbserver",
+            "executable": "${workspaceFolder}/build/nanos2/bin/app.elf",
+            "target": ":1234",
+            "remote": true,
+            "preLaunchTask": "Clean,Build and Run speculos DEBUG",
+            "cwd": "${workspaceFolder}",
+            "valuesFormatting": "parseText",
+            "gdbpath": "gdb-multiarch",
+            "stopAtEntry": false,
+            "autorun": [
+                "source /workspaces/DOOM-Ledger/tools/gdbinit",
+                "set architecture arm",
+                "set osabi GNU/Linux",
+                "handle SIGILL nostop pass noprint",
+                "add-symbol-file '/usr/lib/python3.9/site-packages/speculos/resources/launcher' 0xf00001c0",
+                "add-symbol-file '/workspaces/DOOM-Ledger/build/nanos2/bin/app.elf' 0x40000000",
+                "b *0x40000000",
+                "c",
+            ]
+        },
+    ]
+}
